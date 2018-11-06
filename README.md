@@ -70,4 +70,5 @@
 
 ## kuvei
 ![Ilman tekstiä](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/view_notext.png)
+--------------------
 ![Tekstin kanssa](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/view.png)
