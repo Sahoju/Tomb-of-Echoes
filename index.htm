@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tomb of Echoes</title>
+        <meta charset="utf-8" />
+        <style>
+            body {
+                background-color: #222;
+                color: white;
+            }
+            
+            /* #outer and #middle are for vertical align purposes */
+            #outer {
+                display: table;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+            }
+            
+            #middle {
+                display: table-cell;
+                vertical-align: middle;
+            }
+            
+            #everything {
+                background-color: black;
+                margin-left: auto;
+                margin-right: auto;
+                width: 1280px;
+                height: 720px;
+            }
+            
+            #percent {
+                position: relative;
+                left: 45%;
+                top: 70%;
+                width: 10%;
+                height: 10%;
+                text-align: center;
+                font-size: 40px;
+            }
+            
+            input[type="button"] {
+                width: 100px;
+                height: 50px;
+                border-radius: 4px;
+                background-color: #7c5a15;
+                color: white;
+                border: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="outer">
+            <div id="middle">
+                <div id="everything">
+                    <div id="percent"></div>
+                </div> <!-- #everything -->
+            </div>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="init.js"></script>
+    </body>
+</html>

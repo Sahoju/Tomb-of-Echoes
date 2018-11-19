@@ -1,0 +1,24 @@
+Jussi: init, alkuanimaatio, tietokanta, äänimaailma, tekstit
+Henri: liikkuminen
+
+tekemättä: read, write, inspect, 
+
+init:
+	tiedostot: init.js, php/loadfiles.php
+	aikaa käytetty: 3h
+	muistiinpanot:
+		- toiminnallisuus ok
+		- odottaa filuja
+		
+tietokanta:
+	tiedostot: ../../../php-dbconfig/db-init.php
+	aikaa käytetty: 0h
+	muistiinpanot:
+		- onkohan db-inittiä tarpeen siirtää?
+		- taulu1: action
+			- id, location, sfx, text
+			- sfx ja text ei pakollisia, mutta toinen kuitenkin tulee olemaan aina
+		
+doc:
+	tiedostot: doc/doc.txt
+	aikaa käytetty: 0.5h
