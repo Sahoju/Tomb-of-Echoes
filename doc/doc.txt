@@ -1,14 +1,22 @@
-Jussi: init, alkuanimaatio, tietokanta, äänimaailma, tekstit
+﻿Jussi: init, alkuanimaatio, tietokanta, äänimaailma, tekstit
 Henri: liikkuminen
 
 tekemättä: read, write, inspect, 
 
 init:
 	tiedostot: init.js, php/loadfiles.php
-	aikaa käytetty: 3h
+	aikaa käytetty: 3.5h
 	muistiinpanot:
 		- toiminnallisuus ok
-		- odottaa filuja
+		- lopussa kutsuu skriptiä moviebeginning.js
+		- tällä hetkellä lataa img-kansiosta dumppikuvia, editoidaan lopussa lataamaan oikeat kuvat
+
+alkuanimaatio:
+	tiedostot: moviebeginning.js
+	aikaa käytetty: 0.5h
+	muistiinpanot:
+		- toiminnallisuus ok
+		- jatketaan, kun puhe, musiikki ja kuvat on saatavilla
 		
 tietokanta:
 	tiedostot: ../../../php-dbconfig/db-init.php
@@ -18,6 +26,8 @@ tietokanta:
 		- taulu1: action
 			- id, location, sfx, text
 			- sfx ja text ei pakollisia, mutta toinen kuitenkin tulee olemaan aina
+		- taulu2: user
+			- id, name, date, timetaken, rating, blurb
 		
 doc:
 	tiedostot: doc/doc.txt
