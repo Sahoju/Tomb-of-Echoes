@@ -1,11 +1,12 @@
-﻿Jussi: init, alkuanimaatio, tietokanta, äänimaailma, tekstit
+Jussi: init, alkuanimaatio, tietokanta, äänimaailma, tekstit, loppuanimaatio
 Henri: liikkuminen
-
-tekemättä: read, write, inspect, 
+tehtävää: inspect, tietokantayhteys, vaiheet, rating, reaaliaikatoiminnallisuus, tekstin näyttö
+kielet: jQuery, PHP, MySQL
 
 init:
 	tiedostot: init.js, php/loadfiles.php
 	aikaa käytetty: 3.5h
+	päivät: 19.11.2018
 	muistiinpanot:
 		- toiminnallisuus ok
 		- lopussa kutsuu skriptiä moviebeginning.js
@@ -14,13 +15,23 @@ init:
 alkuanimaatio:
 	tiedostot: moviebeginning.js
 	aikaa käytetty: 0.5h
+	päivät: 20.11.2018
 	muistiinpanot:
 		- toiminnallisuus ok
-		- jatketaan, kun puhe, musiikki ja kuvat on saatavilla
+		- jatketaan, kun puhe, musiikki, kuvat ja tekstit on saatavilla
+
+loppuanimaatio:
+	tiedostot: movieending.js, grained.min.js
+	aikaa käytetty: 1.5h
+	päivät: 21.11.2018
+	muistiinpanot:
+		- toiminnallisuus ok
+		- jatketaan, kun tekstit ovat saatavilla
 		
 tietokanta:
-	tiedostot: ../../../php-dbconfig/db-init.php
-	aikaa käytetty: 0h
+	tiedostot: ../../../php-dbconfig/db-init.php, databasemysql.txt, schema L4929_3@mysql.labranet.jamk.fi
+	aikaa käytetty: 0.5h
+	päivät: 19.11.2018, 20.11.2018
 	muistiinpanot:
 		- onkohan db-inittiä tarpeen siirtää?
 		- taulu1: action
@@ -32,3 +43,4 @@ tietokanta:
 doc:
 	tiedostot: doc/doc.txt
 	aikaa käytetty: 0.5h
+	päivät: joka päivä koko päivä
