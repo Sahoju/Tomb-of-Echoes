@@ -9,7 +9,7 @@ $.ajax({
             let resultObj = eval(result);
             console.log(resultObj);
             preload(resultObj);
-            $(progressdiv).append("<input type='button' value='Start' onclick='removeProgress()'>");
+            $(progressdiv).append("<input type='button' value='Start' onclick='startGame()'>");
         } else {
             console.log('error');
         }
@@ -24,7 +24,7 @@ $(progressdiv).text('0 %');
 function preload(imgs) {
     $(imgs).each(function() {
         if (skipdots > 2) {
-            $('<img/>')[0].src = this;
+            $('<img/>')[0].src = "img/";
             progress += 1/41*100;
             $(progressdiv).text(progress + ' %');
         } else {
@@ -32,6 +32,12 @@ function preload(imgs) {
         }
     });
     $(progressdiv).text(' 100 %');
+}
+
+function startGame() {
+    removeProgress();
+    var game = new Game();
+
 }
 
 function removeProgress() {
