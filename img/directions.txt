@@ -8,8 +8,8 @@
 0,1 south: mid_right.png	tahansa               2,1 south: mid_left.png
 0,1 west: wall01.png                                 2,1 west: far_mid.png
 
-0,2 north: far_left.png	1,2 north: far_mid.png	2,2 north: far_right.png
-0,2 east: far_right.png	1,2 east: mid_right.png	2,2 east: wall02.png
+0,2 north: far_left.png	1,2 north: far_mid.png	    2,2 north: far_right.png
+0,2 east: far_right.png	1,2 east: mid_right.png	    2,2 east: wall02.png
 0,2 south: wall01.png		1,2 south: wall02.png		2,2 south: wall01.png
-0,2 west: wall02.png		1,2 west: mid_left.png	2,2 west: far_left.png
+0,2 west: wall02.png		1,2 west: mid_left.png	    2,2 west: far_left.png
 
