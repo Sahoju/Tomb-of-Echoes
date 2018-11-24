@@ -3,10 +3,10 @@
 0,0 south: far_right.png	1,0 south: far_mid.png		2,0 south: far_left.png
 0,0 west: wall02.png		1,0 west: mid_right.png		2,0 west: far_right.png
 
-0,1 north: mid_left.png	1,1: mid##.png  2,1 north: mid_right.png
+0,1 north: mid_left.png	1,1: mid##.png    2,1 north: mid_right.png
 0,1 east: far_mid.png		missä järjestyksessä  2,1 east: wall01.png
-0,1 south: mid_right.png	tahansa 2,1 south: mid_left.png
-0,1 west: wall01.png    2,1 west: far_mid.png
+0,1 south: mid_right.png	tahansa     2,1 south: mid_left.png
+0,1 west: wall01.png            2,1 west: far_mid.png
 
 0,2 north: far_left.png	1,2 north: far_mid.png	2,2 north: far_right.png
 0,2 east: far_right.png	1,2 east: mid_right.png	2,2 east: wall02.png
