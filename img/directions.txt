@@ -1,15 +1,15 @@
-0,0 north: wall01.png		1,0 north: wall02.png		2,0 north: wall01.png
-0,0 east: far_left.png		1,0 east: mid_left.png		2,0 east: wall02.png
-0,0 south: far_right.png	1,0 south: far_mid.png		2,0 south: far_left.png
-0,0 west: wall02.png		1,0 west: mid_right.png		2,0 west: far_right.png
+0,0 north: bg9.png		1,0 north: bg10.png		2,0 north: bg9.png
+0,0 east: bg0.png		1,0 east: bg3.png		2,0 east: bg10.png
+0,0 south: bg2.png	1,0 south: bg1.png		2,0 south: bg0.png
+0,0 west: bg10.png		1,0 west: bg4.png		2,0 west: bg2.png
 
-0,1 north: mid_left.png	1,1: mid##.png        2,1 north: mid_right.png
-0,1 east: far_mid.png		missä järjestyksessä  2,1 east: wall01.png
-0,1 south: mid_right.png	tahansa               2,1 south: mid_left.png
-0,1 west: wall01.png                                 2,1 west: far_mid.png
+0,1 north: bg3.png		1,1: mid##.png       	 	2,1 north: bg4.png
+0,1 east: bg1.png		missä järjestyksessä 		 2,1 east: bg9.png
+0,1 south: bg4.png	tahansa              		 2,1 south: bg3.png
+0,1 west: bg9.png                              	   2,1 west: bg1.png
 
-0,2 north: far_left.png	1,2 north: far_mid.png	        2,2 north: far_right.png
-0,2 east: far_right.png	1,2 east: mid_right.png	        2,2 east: wall02.png
-0,2 south: wall01.png		1,2 south: wall02.png		2,2 south: wall01.png
-0,2 west: wall02.png		1,2 west: mid_left.png	        2,2 west: far_left.png
+0,2 north: bg0.png		1,2 north: bg1.png	        2,2 north: bg2.png
+0,2 east: bg2.png		1,2 east: bg4.png	        2,2 east: bg10.png
+0,2 south: bg9.png		1,2 south: bg10.png			2,2 south: bg9.png
+0,2 west: bg10.png		1,2 west: bg3.png	        2,2 west: bg0.png
 

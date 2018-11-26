@@ -7,11 +7,21 @@ class Player {
         this.name = playerName; //player gets to pick a name in the beginning
     }
 
-    turn(d) { //allows the player to turn left or right according to the direction (d) (either 1 or -1)       
+    getCoordinates() { //method for returning player coordinates to game.js
+        let coordinates = [this.x, this.y, this.direction];
+        return coordinates;
+    }
+
+    get pDirection() { //returns player direction for event listeners in game.js
+        return this.direction;
+    }
+
+    turn(d) { //allows the player to turn left or right according to the direction (d) (either 1 or 3)       
         this.direction = (this.direction + d) % 4;       
     }
 
-    move(d) { //allows the player to move forwards or backwards according to the direction (d) (either this.direction for forwards, or +2 % 4 for backwards)
+    move(d) { //allows the player to move forwards or backwards according to their direction
+        
         switch(d) //checking current direction
         {
             case 0:

@@ -3,6 +3,11 @@
     <head>
         <title>Tomb of Echoes</title>
         <meta charset="utf-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="init.js"></script>
+        <script src="js/game.js"></script>
+        <script src="js/player.js"></script>
+        <script src="js/tile.js"></script>
         <style>
             body {
                 background-color: #222;
@@ -42,8 +47,20 @@
                 font-size: 40px;
             }
 
-            #textWindow {
+            #controls {
+                position: relative;
+                top: 595px;
+                right: 10px;
+                display: table;
+                height: 100px;
+                width: 164px;
+                float: right;
+                vertical-align: bottom;
+            }
 
+            tr td {
+                width: 50px;
+                height: 50px;
             }
             
             input[type="button"] {
@@ -62,13 +79,12 @@
                 <div id="everything">
                     <div id="percent"></div>
                     <div id="textWindow"></div>
+                    <div id="controls"><table>
+                    <tr id="1strow"><td></td><td></td><td></td></tr>
+                    <tr id="2ndrow"><td></td><td></td><td></td></tr>
+                    </table></div>
                 </div> <!-- #everything -->
             </div>
-        </div>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="init.js"></script>
-        <script src="js/game.js"></script>
-        <script src="js/player.js"></script>
+        </div>       
     </body>
 </html>
