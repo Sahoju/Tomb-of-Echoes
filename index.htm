@@ -58,6 +58,24 @@
                 vertical-align: bottom;
             }
 
+            #textWindow {
+                visibility: hidden;
+                position: absolute;
+                text-align: middle;
+                top: 50%; left: 50%;
+                transform: translate(-50%,-50%);
+                margin: 0 auto;
+                height: 500px;
+                width: 720px;
+                background: rgba(0,0,0,0.5);
+            }
+
+            #textWindow p {
+                margin: 0 auto;
+                padding: 50px;
+                font-size: 30px;
+            }
+
             tr td {
                 width: 50px;
                 height: 50px;
@@ -77,12 +95,12 @@
         <div id="outer">
             <div id="middle">
                 <div id="everything">
-                    <div id="percent"></div>
-                    <div id="textWindow"></div>
+                    <div id="percent"></div>                   
                     <div id="controls"><table>
                     <tr id="1strow"><td></td><td></td><td></td></tr>
                     <tr id="2ndrow"><td></td><td></td><td></td></tr>
                     </table></div>
+                    <div id="textWindow"><p>There appears to be text written here...</p><br><br><p>lol help me I'm trapped</p></div>                
                 </div> <!-- #everything -->
             </div>
         </div>       

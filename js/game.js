@@ -5,6 +5,8 @@ var tileArray;
 function startGame() //setting the game up
 {  
     $('#percent').remove(); //removing progress bar
+    $('#textWindow').css('visibility','visible'); //making the textWindow work
+    $('#textWindow').toggle(); //turning it off at first
     //welcomeUser();
 
     $('#1strow td:nth-child(2)').append( //coupling UI controls with their respective images (arrows)
@@ -24,7 +26,7 @@ function startGame() //setting the game up
 
     //event listeners for player GUI arrows and keyboard arrows, moving and turning
     $('#arr0').on('click', function(){
-        movePlayer(player.pDirection);
+        movePlayer(player.pDirection);       
     });
     $('#arr1').on('click', function(){
         turnPlayer(3);
@@ -36,6 +38,7 @@ function startGame() //setting the game up
         turnPlayer(1);
     });
     $(window).keydown(function(event) {
+        showText();
         if(event.key == "ArrowUp") //making sure the pressed key was an arrow... apparently event.which is deprecated
             movePlayer(player.pDirection);
         else if (event.key == "ArrowLeft")
@@ -44,6 +47,10 @@ function startGame() //setting the game up
             turnPlayer(1);
         else if (event.key == "ArrowDown")
             movePlayer((player.pDirection + 2) % 4);
+    })
+    $('#everything').click(function() { //hiding text window when clicking out of it
+        if ($('#textWindow').is(':visible'))
+            hideText();
     })
  
     imageElements = imageElements.splice(4); //removing UI elements from image array, leaving only backgrounds
@@ -65,6 +72,16 @@ function startGame() //setting the game up
     $('#everything').css('background-image', 'url(' + tileArray[0][0].viewArray[1].src + ')'); //player starting position view
 }
 
+function showText() //displays the text window in game
+{
+    $('#textWindow').fadeIn();
+}
+
+function hideText() //hides the text window in game
+{
+    $('#textWindow').fadeOut();
+}
+
 function welcomeUser() //initial text popup that asks for the user's name (WIP)
 {
     $('#textWindow').append("<h1 style='margin: 0 auto;'>Welcome.</h1><br><br><p>What is thy name, Spirit?</p><br><br><input type='text'> <button onclick='mainLoop()'>✓</button>");
@@ -77,7 +94,8 @@ function drawNext() //function for updating the background according to player c
 }
 
 function movePlayer(d) { //event handler for letting the player move forwards and backwards
-        
+    if ($('#textWindow').is(':visible'))
+        hideText(); //hiding the text window if the player decides to move      
     player.move(d);
     drawNext();
 }
