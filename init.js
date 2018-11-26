@@ -33,6 +33,10 @@ $.ajax({ //preloading image files so that they don't have to be downloaded separ
             let resultObj = eval(result);
             console.log('getmessages:');
             console.log(resultObj);
+            $(resultObj).each(function() {
+                texts.push(this);
+            });
+            console.log(texts);
         } else {
             console.log('error');
         }
