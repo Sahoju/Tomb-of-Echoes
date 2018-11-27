@@ -29,6 +29,12 @@ function startGame() //setting the game up
         if ($('#textWindow').css('display') == 'none')
         showText();
     });
+    $('#write').on('click', function(){ //event listener for write button
+        console.log('clicked');
+        // if ($('#formWindow').css('display') == 'none')
+        showText();
+    });
+    
     $(window).keydown(function(event) {
         //showText();
         if(event.key == "ArrowUp") //making sure the pressed key was an arrow... apparently event.which is deprecated
@@ -99,6 +105,11 @@ function showText() //displays the text window in game
     animate({top:'50%',opacity:1},600); //cool slide animation
 }
 
+function showForm() {
+    $('#formWindow').css({top:550,position:'absolute',opacity:0,display:'block'}).
+    animate({top:'50%',opacity:1},600); //cool slide animation
+}
+
 function hideText() //hides the text window in game
 {
     $('#textWindow').fadeOut();
@@ -114,4 +125,63 @@ function movePlayer(d) { //event handler for letting the player move forwards an
 function turnPlayer(d){ //event handler for letting the player turn left and right
     player.turn(d);
     drawNext();
+}
+
+function write() {
+    let chars = "qwertyuiopåasdfghjklöäzxcvbnmQWERTYUIOPÅASDFGHJKLÖÄZXCVBNM1234567890+´!\"#¤%&/()=?`@£$€{[]}\\µ¨'^*~-.,_:;§½<>|ëÿüïâêûîãáéýúíóàèùìòñËÜÏÂÊÛÎÔÃÁÉÝÚÍÓÀÈÙÌÒÑÇçæÆ¢¥ƒ¿¬¼¡«»¦ß±°•·²€„…†‡‰Š‹Œ‘’“”™š›œŸ©®¯³¹¾Ð×ØÞð÷øþ";
+
+    // In case text is copypasted, all input letters are garbled.
+    // lengthbefore is for checking the position of the point
+    // where text was copypasted, and therefore need to be iterated
+    // to garble every letter
+    let lengthbefore = 0;
+
+    $('#textbox').on('input', function() {
+        // get #textbox value
+        let value = $(this).val();
+        // get the position of the random character from chars variable
+        randomchar = Math.random() * chars.length;
+        // generate number for the coming if-statement
+        randomchance = Math.random() * 100;
+
+        // if more than one letter was pasted
+        if(value.length > lengthbefore + 1) {
+            // iterate through all pasted letters
+            for($i = lengthbefore; $i < value.length - 1; $i++) {
+                if(Math.random() * 100 < 25) {
+                    // New value before the pasted text stays.
+                    // The letter in the corresponding position
+                    // is replaced with a random character,
+                    // and the rest of the string stays the same
+                    // until the next iteration.
+                    value =
+                        value.substring(0,$i - 1) +
+                        chars.charAt(Math.random() * chars.length) +
+                        value.substring($i,value.length);
+                }
+            }
+        }
+        // if only one letter was added
+        else if(randomchance < 25) {
+            // change the last letter to a random character
+            value = value.substring(0,value.length - 1) +
+                chars.charAt(randomchar);
+        }
+
+        // re-initialize lengthbefore variable for coming inputs
+        lengthbefore = value.length;
+        // replace #textbox value with garbled text
+        $('#textbox').val(value);
+    });
+
+    /*
+    $('#write').on('click', function() {
+        if($('#textbox').val() != '') {
+            let value = $('#text').val();
+            $.post('../php/insert_to_database.php', {text:value});
+        } else {
+            $('div').text('Nothing ventured, nothing gained.');
+        }
+    });
+    */
 }
