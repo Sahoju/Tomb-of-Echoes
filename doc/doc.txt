@@ -1,5 +1,5 @@
 ﻿Jussi: init, alkuanimaatio, tietokanta, äänimaailma, tekstit, loppuanimaatio
-Henri: liikkuminen, renderöinti, pelilogiikka, kontrollit
+Henri: liikkuminen, renderöinti, pelilogiikka, kontrollit, GUI
 tehtävää: inspect, tietokantayhteys, vaiheet, rating, reaaliaikatoiminnallisuus, tekstin näyttö
 todo: change image JSON array to dictionary to avoid brain damage -H
 kielet: jQuery, PHP, MySQL
@@ -48,9 +48,9 @@ doc:
 
 
 game:
-	tiedostot: game.js, player.js, tile.js
-	aikaa käytetty: 20h
-	päivät: 20.11.2018, 22.11.2018, 24.11.2018, 25.11.2018, 26.11.2018
+	tiedostot: game.js, player.js, tile.js, init.js, index.htm
+	aikaa käytetty: 30h
+	päivät: 20.11.2018, 22.11.2018, 24.11.2018, 25.11.2018, 26.11.2018, 27.11.2018
 	muistiinpanot:
 		- renderöintiä varten tarvittiin kuvat, jotta toiminnallisutta voitiin testata
 		- pelin logiikka perustuu rajattuun 3x3 koordinaatistoon, jossa jokaista pelaajan koordinaattia

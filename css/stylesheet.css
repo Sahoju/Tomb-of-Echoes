@@ -1,0 +1,99 @@
+@font-face {
+    font-family: "Crazy Killer";
+    src: url(CRAZK___.TTF);
+}
+
+body {
+    background-color: #222;
+    color: white;
+}
+
+/* #outer and #middle are for vertical align purposes */
+#outer {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#everything {
+    background-color: black;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1280px;
+    height: 720px;
+}
+
+#percent {
+    position: relative;
+    left: 45%;
+    top: 70%;
+    width: 10%;
+    height: 10%;
+    text-align: center;
+    font-size: 40px;
+}
+
+#controls {
+    position: relative;
+    bottom: -535px;
+    right: 10px;
+    display: table;
+    height: 180px;
+    width: 164px;
+    float: right;
+    vertical-align: bottom;
+    table-layout: fixed;
+}
+
+tr td {
+    overflow: hidden;
+    max-height: 50px;
+    width: 51px;               
+    height: 51px;
+    padding: 2px;
+}
+
+#controls img {
+    visibility: hidden;
+    width: 50px;
+    height: 50px;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+#textWindow {
+    visibility: hidden;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0 auto;
+    height: 500px;
+    width: 720px;
+    background: rgba(0,0,0,0.5);
+}
+
+#textWindow p,h3 {
+    margin: 0 auto;
+    padding: 50px;
+    font-size: 30px;
+    text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+input[type="button"] {
+    width: 100px;
+    height: 50px;
+    border-radius: 4px;
+    background-color: #7c5a15;
+    color: white;
+    border: 0;
+}
