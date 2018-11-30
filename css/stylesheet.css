@@ -97,3 +97,22 @@ input[type="button"] {
     color: white;
     border: 0;
 }
+
+#inspected, #writing {
+    display: none;
+}
+
+#writeTextbox {
+    position: absolute;
+    width: 150px;
+    height: 25px;
+    top: 210px;
+    left: 285px;
+}
+
+#writeSend {
+    position: absolute;
+    top: 265px;
+    left: 310px;
+}
+

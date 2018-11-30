@@ -15,15 +15,34 @@
             <div id="middle">
                 <div id="everything">
                     <div id="percent"></div>                   
-                    <div id="controls"><table>
-                    <tr><td></td><td><img id="inspect" src="img/inspect.png"></td><td><img id="write" src="img/write.png"></td></tr>
-                    <tr><td></td><td><img id="arr1" src="img/arr1.png"></td><td></td></tr>
-                    <tr><td><img id="arr2" src="img/arr2.png"></td><td><img id="arr3" src="img/arr3.png"></td><td><img id="arr4" src="img/arr4.png"></td></tr>
-                    </table></div>
-                    <div id="textWindow"><h3>There appears to be text written here...</h3><br><br><p style="font-family: Crazy Killer;line-height:45px;"></p></div>     
-                    <div id="formWindow">
-                        <input type="text" id="textbox">
-                        <input type="button" id="write" value="write">
+                    <div id="controls">
+                        <table>
+                            <tr><td></td><td>
+                                <img id="inspect" src="img/inspect.png"></td><td><img id="writeButton" src="img/write.png">
+                            </td></tr>
+                            <tr><td></td><td>
+                                <img id="arr1" src="img/arr1.png"></td>
+                            <td></td></tr>
+                            <tr><td>
+                                <img id="arr2" src="img/arr2.png"></td>
+                                <td><img id="arr3" src="img/arr3.png"></td>
+                                <td><img id="arr4" src="img/arr4.png"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="textWindow">
+                        <span id="inspected">
+                            <h3>There appears to be text written here...</h3>
+                            <br>
+                            <br>
+                            <p style="font-family: Crazy Killer;line-height:45px;"></p>
+                        </span>
+                        <span id="writing">
+                            <input type="text" id="writeTextbox">
+                            <input type="button" id="writeSend" value="write"><br>
+                            <br>
+                            <p style="font-family: Crazy Killer;line-height:45px;"></p>
+                        </span>
                     </div>
                 </div> <!-- #everything -->
             </div>

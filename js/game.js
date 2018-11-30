@@ -2,10 +2,13 @@ var player;
 var tileArray;
 var phase; //for keeping track of the game's phase which determines text locations
 var pC; //for keeping track of the player's coordinates
+let chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890+ÖÄåÅöä´!\"#¤%&/()=?`@£$€{[]}\\µ¨'^*~-.,_:;§½<>|ëÿüïâêûîãáéýúíóàèùìòñËÜÏÂÊÛÎÔÃÁÉÝÚÍÓÀÈÙÌÒÑÇçæÆ¢¥ƒ¿¬¼¡«»¦ß±°•·²€„…†‡‰Š‹Œ‘’“”™š›œŸ©®¯³¹¾Ð×ØÞð÷øþ"; // for #textbox; characters that can randomly replace any written character
+// note: game doesn't allow at least ' character
 
+let lengthbefore = 0; // for #textbox
 
 function startGame() //setting the game up
-{  
+{
     $('#percent').remove(); //removing progress bar
     $('#textWindow').css('visibility','visible'); //making the textWindow work
     $('#textWindow').toggle(); //turning it off at first  
@@ -25,14 +28,121 @@ function startGame() //setting the game up
     $('#arr4').on('click', function(){
         turnPlayer(1);
     });
+    
     $('#inspect').on('click', function(){ //event listener for inspecting tile text
-        if ($('#textWindow').css('display') == 'none')
-        showText();
+        //content in the json data is structured like "0_sound.ogg" where the digit is the index of the 
+        //text to display from 'texts.txt' and the .ogg a sound to play... _ is the splitting char
+        let textIndex = textCoordinates[phase + '' + pC[0] + '' + pC[1]].split("_")[0];
+        $('#textWindow p').text(texts[textIndex]);
+        
+        // if text window is visible and write form is open, hide inspect text and show write form
+        if($('#textWindow').css('display') == 'block' && 
+          $('#writing').css('display') == 'block') {
+            $('#writing').css('display', 'none');
+            $('#inspected').css('display', 'block');
+        }
+        
+        // if text window is visible and write form is visible, hide write form and then fade text window out
+        else if($('#textWindow').css('display') == 'block' &&
+            $('#inspected').css('display') == 'block') {
+            $('#inspected').css('display', 'none');
+            hideText();
+        }
+        
+        // if text window is not visible, show text window and write form
+        else if($('#textWindow').css('display') == 'none') {
+            $('#inspected').css('display', 'block');
+            showText();
+        }
+        
+        /*
+        let content = '<h3>There appears to be text written here...</h3><br><br><p style="font-family: Crazy Killer;line-height:45px;">'
+            + texts[textIndex] + '</p>';
+        showText(content);
+        */
     });
-    $('#write').on('click', function(){ //event listener for write button
+    
+    $('#writeButton').on('click', function(){ //event listener for write button
+        // if text window is visible and inspect text is open, hide inspect text and show write form
+        if($('#textWindow').css('display') == 'block' && 
+          $('#inspected').css('display') == 'block') {
+            $('#inspected').css('display', 'none');
+            $('#textWindow p').text('');
+            $('#writing').css('display', 'block');
+        }
+        
+        // if text window is visible and write form is visible, hide write form and then fade text window out
+        else if($('#textWindow').css('display') == 'block' &&
+            $('#writing').css('display') == 'block') {
+            $('#writing').css('display', 'none');
+            hideText();
+        }
+        
+        // if text window is not visible, show text window and write form
+        else if($('#textWindow').css('display') == 'none') {
+            $('#writing').css('display', 'block');
+            showText();
+        }
+        
+        /*
         console.log('clicked');
         // if ($('#formWindow').css('display') == 'none')
-        showText();
+        let content = '<input type="text" id="textbox"> <input type="button" id="send" value="write"><br><br><p style="font-family: Crazy Killer;line-height:45px;"></p>';
+        showText(content);
+        */
+    });
+    
+    // when something is typed on #textbox
+    $('#writeTextbox').on('input', function() {
+        console.log('type');
+        // get #textbox value
+        let value = $(this).val();
+        // get the position of the random character from chars variable
+        randomchar = Math.random() * chars.length;
+        // generate number for the coming if-statement
+        randomchance = Math.random() * 100;
+
+        // if more than one letter was pasted
+        if(value.length > lengthbefore + 1) {
+            // iterate through all pasted letters
+            for($i = lengthbefore; $i < value.length - 1; $i++) {
+                if(Math.random() * 100 < 25) {
+                    // New value before the pasted text stays.
+                    // The letter in the corresponding position
+                    // is replaced with a random character,
+                    // and the rest of the string stays the same
+                    // until the next iteration.
+                    value =
+                        value.substring(0,$i - 1) +
+                        chars.charAt(Math.random() * chars.length) +
+                        value.substring($i,value.length);
+                }
+            }
+        }
+        // if only one letter was added
+        else if(randomchance < 25) {
+            // change the last letter to a random character
+            value = value.substring(0,value.length - 1) +
+                chars.charAt(randomchar);
+        }
+
+        // re-initialize lengthbefore variable for coming inputs
+        lengthbefore = value.length;
+        // replace #textbox value with garbled text
+        $('#writeTextbox').val(value);
+    });
+    
+    $('#writeSend').on('click', function() {
+        let textboxContent = $('#writeTextbox').val();
+        console.log(textboxContent);
+        let data = {
+            x: pC[0],
+            y: pC[1],
+            content: textboxContent
+        }
+        $.post('php/writemessages.php', data, function(returnedData) {
+            console.log(returnedData);
+        });
     });
     
     $(window).keydown(function(event) {
@@ -46,12 +156,13 @@ function startGame() //setting the game up
         else if (event.key == "ArrowDown")
             movePlayer((player.pDirection + 2) % 4);
     })
+    
     $('#everything').click(function(event) { //hiding text window when clicking out of it
         if(event.target !== event.currentTarget) return; //Do nothing if #everything was not directly clicked
-        if ($('#textWindow').is(':visible'))
+        if ($('#textWindow').is(':visible')) {
             hideText();
-    })
-
+        }
+    });
 
     player = new Player("test"); //creating a Player object with name, includes methods for turning and moving
     tileArray = [[],[],[]]; //2D array for storing the grid tiles in
@@ -96,22 +207,16 @@ function getTileText(x, y) //checks if current tile has any text items to displa
 
 function showText() //displays the text window in game
 {
-    //content in the json data is structured like "0_sound.ogg" where the digit is the index of the 
-    //text to display from 'texts.txt' and the .ogg a sound to play... _ is the splitting char
-    let textIndex = textCoordinates[phase + '' + pC[0] + '' + pC[1]].split("_")[0];
-    $('#textWindow p').text(texts[textIndex]); //displaying the pre-defined text according to the given index
-
+    // $('#textWindow').html(content); //displaying the pre-defined text according to the given index
     $('#textWindow').css({top:550,position:'absolute',opacity:0,display:'block'}).
-    animate({top:'50%',opacity:1},600); //cool slide animation
-}
-
-function showForm() {
-    $('#formWindow').css({top:550,position:'absolute',opacity:0,display:'block'}).
     animate({top:'50%',opacity:1},600); //cool slide animation
 }
 
 function hideText() //hides the text window in game
 {
+    $('#inspected').css('display', 'none');
+    $('#writing').css('display', 'none');
+    $('#textWindow p').text('');
     $('#textWindow').fadeOut();
 }
 
@@ -125,63 +230,4 @@ function movePlayer(d) { //event handler for letting the player move forwards an
 function turnPlayer(d){ //event handler for letting the player turn left and right
     player.turn(d);
     drawNext();
-}
-
-function write() {
-    let chars = "qwertyuiopåasdfghjklöäzxcvbnmQWERTYUIOPÅASDFGHJKLÖÄZXCVBNM1234567890+´!\"#¤%&/()=?`@£$€{[]}\\µ¨'^*~-.,_:;§½<>|ëÿüïâêûîãáéýúíóàèùìòñËÜÏÂÊÛÎÔÃÁÉÝÚÍÓÀÈÙÌÒÑÇçæÆ¢¥ƒ¿¬¼¡«»¦ß±°•·²€„…†‡‰Š‹Œ‘’“”™š›œŸ©®¯³¹¾Ð×ØÞð÷øþ";
-
-    // In case text is copypasted, all input letters are garbled.
-    // lengthbefore is for checking the position of the point
-    // where text was copypasted, and therefore need to be iterated
-    // to garble every letter
-    let lengthbefore = 0;
-
-    $('#textbox').on('input', function() {
-        // get #textbox value
-        let value = $(this).val();
-        // get the position of the random character from chars variable
-        randomchar = Math.random() * chars.length;
-        // generate number for the coming if-statement
-        randomchance = Math.random() * 100;
-
-        // if more than one letter was pasted
-        if(value.length > lengthbefore + 1) {
-            // iterate through all pasted letters
-            for($i = lengthbefore; $i < value.length - 1; $i++) {
-                if(Math.random() * 100 < 25) {
-                    // New value before the pasted text stays.
-                    // The letter in the corresponding position
-                    // is replaced with a random character,
-                    // and the rest of the string stays the same
-                    // until the next iteration.
-                    value =
-                        value.substring(0,$i - 1) +
-                        chars.charAt(Math.random() * chars.length) +
-                        value.substring($i,value.length);
-                }
-            }
-        }
-        // if only one letter was added
-        else if(randomchance < 25) {
-            // change the last letter to a random character
-            value = value.substring(0,value.length - 1) +
-                chars.charAt(randomchar);
-        }
-
-        // re-initialize lengthbefore variable for coming inputs
-        lengthbefore = value.length;
-        // replace #textbox value with garbled text
-        $('#textbox').val(value);
-    });
-
-    /*
-    $('#write').on('click', function() {
-        if($('#textbox').val() != '') {
-            let value = $('#text').val();
-            $.post('../php/insert_to_database.php', {text:value});
-        } else {
-            $('div').text('Nothing ventured, nothing gained.');
-        }
-    });
-    */
 }
