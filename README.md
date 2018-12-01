@@ -144,7 +144,7 @@ Ajan mittaus aloitettiin rehdisti, mutta jossain vaiheessa se jäi. Hupsista. Ka
 **Loppudokumentointi:** 3h  
 **Yhteensä:** 72h
 
-Molemmat siis tekivät noin 36h. Tuntuu vähäiseltä.
+Molemmat siis tekivät noin 36h. Tuntuu vähäiseltä, mutta uskallamme kuitenkin väittää, että Web-ohjelmoinnin osalta arvosanaksi annetaan 5. Palvelinohjelmoinnin kannalta voisi hyvä arvosana olla 4.
 
 ## 4. Pohdinta ja jatkokehitys
 
