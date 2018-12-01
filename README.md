@@ -5,7 +5,7 @@
 **Päivämäärä:** 30.11.2018  
 **Suositeltu selain:** Google Chrome  
 **Linkki:** https://student.labranet.jamk.fi/~L4929/ttms0500/Tomb-of-Echoes/  
-**Huomioita:** Pelillä kestää hetki näyttää mitään. Pelillä on myös pieni mahdollisuus, että jotain viestiä ei pääse lukemaan, eli peli ei etene. Suositeltavaa on ladata sivu uudestaan. Pahoittelemme häiriötä.
+**Huomioita:** Pelillä kestää hetki näyttää mitään.
 
 ## 1.1. Yleisesti
 
