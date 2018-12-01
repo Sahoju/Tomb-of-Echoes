@@ -2,8 +2,8 @@
 
 **Tekijät:** Henri Mäkelä, Jussi Surma-Aho  
 **Kurssit:** TTMS0500, Web-ohjelmointi; TTMS0900, Web-palvelinohjelmointi  
-**Päivämäärä:** 30.11.2018
-**Suositeltu selain:** Google Chrome
+**Päivämäärä:** 30.11.2018  
+**Suositeltu selain:** Google Chrome  
 **Linkki:** https://student.labranet.jamk.fi/~L4929/ttms0500/Tomb-of-Echoes/ (pelillä kestää hetki näyttää mitään)
 
 ## 1.1. Yleisesti
