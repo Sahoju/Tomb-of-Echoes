@@ -1,7 +1,7 @@
 # Tomb of Echoes
 
-**Tekijät:** Henri Mäkelä, Jussi Surma-Aho
-**Kurssit:** TTMS0500, Web-ohjelmointi; TTMS0900, Web-palvelinohjelmointi
+**Tekijät:** Henri Mäkelä, Jussi Surma-Aho  
+**Kurssit:** TTMS0500, Web-ohjelmointi; TTMS0900, Web-palvelinohjelmointi  
 **Päivämäärä:** 30.11.2018
 
 ## 1.1. Yleisesti
@@ -108,15 +108,15 @@ Henri-cha~n
 
 Ajan mittaus aloitettiin rehdisti, mutta jossain vaiheessa se jäi. Hupsista. Kaikki ajat ovat viitteellisiä.
 
-**Suunnittelu:** 3h
-**Alullepano (index.htm ja yksinkertainen initialisaatio):** 4h
-**Videot:** 2h
-**Tietokanta ja sen toiminnallisuudet:** 13h
-**Pelaajan liikkuminen ja kentän luominen:** 20h
-**Teksti-ikkuna ja sen toiminnallisuudet:** 8h
-**Reaaliaikatoiminnallisuus:** 2h
-**Spagettikoodin korjaus:** 10h
-**Kämäset graffat:** 4h
+**Suunnittelu:** 3h  
+**Alullepano (index.htm ja yksinkertainen initialisaatio):** 4h  
+**Videot:** 2h  
+**Tietokanta ja sen toiminnallisuudet:** 13h  
+**Pelaajan liikkuminen ja kentän luominen:** 20h  
+**Teksti-ikkuna ja sen toiminnallisuudet:** 8h  
+**Reaaliaikatoiminnallisuus:** 2h  
+**Spagettikoodin korjaus:** 10h  
+**Kämäset graffat:** 4h  
 **Yhteensä:** 66h
 
 Molemmat siis tekivät noin 33h. Tuntuu vähäiseltä.
