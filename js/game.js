@@ -253,13 +253,16 @@ function submitText() //submitting player input to the database when pressing "W
 {
     let textboxContent = $('#writeTextbox').val();
     console.log(textboxContent);
-    let data = {
-        x: pC[0],
-        y: pC[1],
-        content: textboxContent
+    if(textboxContent != "") //making sure something was actually written
+    {
+        let data = {
+            x: pC[0],
+            y: pC[1],
+            content: textboxContent
+        }
+        $.post('php/writemessages.php', data, function(returnedData) {
+            console.log(returnedData);
+        });    
+        hideText();
     }
-    $.post('php/writemessages.php', data, function(returnedData) {
-        console.log(returnedData);
-    });
-    hideText();
 }
