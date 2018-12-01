@@ -20,7 +20,7 @@ Pelin alkuperäinen suunnitelma löytyy [Wiki-sivulta](https://github.com/Sahoju
 	1. Kuulla satunnaisesti pelin aikana ääniä. Mitä pitemmällä pelissä ollaan, sitä useammin niitä kuuluu
 	1. Aina, kun joku muu pelaaja kirjoittaa viestin, kuuluu siitä ääni toisille samaan aikaan pelaaville
 	1. Kun peli jatkuu pitemmälle, tulee peliruudun eteen pikkuhiljaa enemmän ja enemmän noise-efektiä
-1. Kun peli loppuu, eli tietyn verran aikaa on kulunut ja/tai tietyn verran viestejä on luettu, alkaa loppuvideo, jossa vilahtaa vain yksi kuva sankan noise-efektin takana.
+1. Kun peli loppuu, eli kaikki satunnaisesti valitut viestit on luettu, nostetaan grainia yhä enemmän ja ikkuna fades to black. Sen jälkeen lopputekstit kertovat pelaajan tulleen hulluksi. Tämän jälkeen olisi tarkoitus alkaa loppuvideo, jossa vilahtaa vain yksi kuva sankan noise-efektin takana.
 1. Loppuvideon jälkeen pelaajalta kysytään nimi, pelille arvosana tähtinä ja sanallinen arvio. Arvio ei ole pakollinen.
 
 ## 2.1. Toteutus
@@ -39,11 +39,11 @@ Kun sivu avataan, peli alkaa heti luomaan yhteyksiä tarvittavien tietojen väli
 
 **Tiedostot:** init.js, loadfiles.php, kaikki kuvat img-kansiossa
 
-Sivun avautuessa käynnistetään loadfiles.php-skripti, joka hakee img-kansiosta kuvien nimet ja niiden määrän, ja palauttaa ne Json-muodossa (hupaisaa kyllä, mukaan lasketaan myös directions.txt, joka on vain dokumentointia varten tehty tiedosto). Jos tiedostoja on, käynnistetään funktio preload, johon viedään skriptistä saadut tiedostojen nimet.
+Sivun avautuessa käynnistetään loadfiles.php-skripti, joka hakee img-kansiosta kuvien nimet ja niiden määrän, ja palauttaa ne Json-muodossa. Jos tiedostoja on, käynnistetään funktio preload, johon viedään skriptistä saadut tiedostojen nimet.
 
 preload-funktiossa lasketaan pois kaksi ensimmäistä json-tiedon hankkimaa "tiedostoa:" "." ja "..". Varmuutta ei ole, mutta ne lienevät jotain kansiorakenteeseen liittyviä "tiedostoja," joita ei kuitenkaan ole oikeasti olemassa; ne siis jätetään huomioimatta.
 
-asdasd Henri muokkaa
+Lisäksi grain-efektille määritellään täällä ensisijaiset asetukset.
 
 ### 2.2.2. Tekstien lataus
 
@@ -63,20 +63,33 @@ Tietokantayhteys tuli aluksi tehtyä mysqli-komennoilla, mutta opettajan suostut
 
 Pelissä oleva prosenttiluku viittaa latauksen edistystä. Luku alkaa nollasta, johon lisätään aina 1/(kuvien määrä) * 100, kun yksi kuva ladataan. Toiminto ei kuitenkaan pelitä kunnolla, sillä pelin alussa, kun otetaan yhteyttä palvelimeen ja tietokantaan, ruudussa ei näy mitään. Lisäksi tekstien latausta ei olla huomioitu ollenkaan, eikä ääni- ja tekstitiedostoja ole ladattavissa ollenkaan. Toimintoa tulee siis laajentaa pitemmälle myöhemmin.
 
-## 2.3. Pelissä liikkuminen ja pelaajan sijainnin määrittäminen
+## 2.3. Pelissä liikkuminen, pelaajan sijainnin määrittäminen ja pelin kulku
 
 **Tiedostot:** game.js, tile.js, player.js
-asdasd Henrin juttu
+
+Peli perustuu 2D-taulukon (lue: matriisin) navigointiin, joka luodaan startGame() alustusfunktiossa. Pelaajalle luodaan oma player.js olionsa, jolla on siis x ja y koordinaatit, ja lisäksi suunta "d", joka määrittää mitä hän näkee. Jokaisen matriisin alkioon on tallennettu tile.js objekti. tile.js objekti sisältää taulukon, jossa on 4 init.js:ssä esiladattua Image-oliota. Jokaiseen näistä Image-olioista sisältyy URL johonkin img/ kansion kuvaan. Pelaajan suunta (d) määrää indeksinä, mikä taulukon kuvista näytetään pelaajalle.
+
+0.0 1.0 2.0
+0.1 1.1 2.1
+0.2 1.2 2.2
+
+Toki tämän olisi voinut toteuttaa yksi-ulotteisestikin näin jälkipäin aatellen, mutta 2D-taulukko on ehkä intuitiivisempi lähestymistapa. Lisätietoa eri kuvien indekseistä saa doc/directions.txt tiedostosta.
+
+Liikkumista varten game.js sisältää tapahtumankuuntelijoita GUI:n napeille sekä myös näppäimistön nuolinäppäimille. Nämä kutsuvat tapahtumankäsittelijöitä movePlayer() ja turnPlayer() tietyillä argumenteilla, riippuen liikutaanko eteenpäin vaiko taaksepäin, tai käännytäänkö oikealle vaiko vasemmalle. Itse liikkumis- ja kääntymismetodit kuuluvat objekti-orientoituun tapaan player.js luokkaan, jossa pelaajan liikkumista myös rajoitetaan, jotta gridin ulkopuolelle ei päästä, ja jotta pelaaja ei kykenisi kääntymään olemassaolemattomaan suuntaan.
+
+Pelaajan suuntia on 4 (0-3), jossa 0 vastaa pohjoista (North) ja jatkuu siitä kellonsuuntaisesti. Hassua oli koodatessa huomata, että suunnanmuutoksessa käytettävä modulo % toimii eritavalla Javascriptissä kuin tavan matematiikassa, kun tullaan negatiivisiin kokonaislukuihin. Matemaattisesti -1 % 4 olisi 3, mutta Javascriptissä -1. Wikipedia-haun perusteella kyseinen asia on melkoinen dilemma eri kielien eroavista modulototeutuksista johtuen.
+
+movePlayer() sisältää pelin etenemislogiikan, jossa pelin phase:a inkrementoidaan aina, kun luettavat tekstit ovat loppuneet. Tässä kohdin esiin tulee netistä bongattu open-source grain-efektitoteutus. (https://github.com/sarathsaleem/grained) Grain-efektin voimakkuus kasvaa asynkroonisesti phasen kasvaessa, ja luettavat tekstit ja niiden koordinaatit korvautuvat uusilla. Tämä on pahan ennusmerkki. Lisäksi funktiossa päivitetään pelaajan koordinaatit, ja katsotaan, onko pelaajan liikkumalla tiilellä luettavaa tekstiä. Kun phase on 2, ja kaikki tekstit on luettu, peli päättyy. Lopuksi kutsutaan drawNext() funktiota, joka päivittää pelaajalle näytettävää kuvaa hänen koordinaattiensa ja suunnan perusteella.
 
 ## 2.4. Teksti-ikkuna
 
-**Tiedostot:** game.js
+**Tiedostot:** index.htm, game.js
 
 Teksti-ikkuna ilmestyy näyttöön, kun joko suurennuslasi- tai kynäikonia painetaan. Ikkuna ilmestyy pienellä animaatiolla, ja lähtee pois joko painamalla samaa ikonia uudestaan tai jonnekin muualle kuin ikoneihin tai ikkunaan itsessään. Jos painaa toista ikonia kuin millä ikkuna avattiin, ikkunan sisältö vaihtuu vastaavasti.
 
 ### 2.4.1. Tekstien luku
 
-**Tiedostot:** game.js(, texts.txt)
+**Tiedostot:** game.js
 
 Kohdassa 2.2.2. selitettiin tekstien hausta. Kun pelaaja siirtyy kohtaan, minkä koordinaatit ovat samat kuin jonkin viestin, suurennuslasi ilmestyy näytölle. Sitä painaessa ilmestyy pienellä animaatiolla teksti-ikkuna, jossa lukee kyseinen viesti.
 
@@ -84,11 +97,13 @@ Kohdassa 2.2.2. selitettiin tekstien hausta. Kun pelaaja siirtyy kohtaan, minkä
 
 **Tiedostot:** game.js, writemessages.php, db_fns.php
 
-Edellisen kohdan teksti-ikkuna ilmestyy myös kynäikonia painaessa; ruutuun ilmestyy tekstikenttä ja nappi. Tekstikenttään kirjoittaessa jokaisella kirjaimella on 30 %:n mahdollisuus, että kirjain muuttuu joksikin muuksi merkiksi. Merkkilistalle on oma muuttujansa chars, josta satunnaisesti valitaan yksi aina, kun osutaan 30 %:n kohdalle.
+Edellisen kohdan teksti-ikkuna ilmestyy myös kynäikonia painaessa; ruutuun ilmestyy tekstikenttä ja nappi. Tekstikenttään kirjoittaessa jokaisella kirjaimella on 33 %:n mahdollisuus, että kirjain muuttuu joksikin muuksi merkiksi. Merkkilistalle on oma muuttujansa chars, josta satunnaisesti valitaan yksi aina, kun osutaan 33 %:n kohdalle.
 
 Nappia painaessa tekstikentässä oleva teksti ja pelaajan koordinaatit viedään tietokantaan. Tekstin sisällölle ei ole toistaiseksi mitään tarkistuksia, joten pelin ja tietokannan voi helposti hajottaa.
 
-Lisäksi funktiolle määriteltiin toiminnallisuus pastettuja tekstejä varten: jokaisen merkin lisäyksen yhteydessä päivitetään lengthbefore-muuttujaa vastaamaan nykyisen kirjoituksen pituutta. Kun muuttujan ja uuden kirjoituksen pituuden ero on enemmän kuin yksi, leikkaa funktio tekstin kahtia edellisen kirjoituksen viimeisestä merkistä. Tämän jälkeen jokainen uudella kirjaimella on jälleen 30 %:n mahdollisuus, että se muuttuu muuksi. Lopuksi lengthbefore-muuttujaa päivitetään jälleen.
+Lisäksi funktiolle määriteltiin toiminnallisuus pastettuja tekstejä varten: jokaisen merkin lisäyksen yhteydessä päivitetään lengthbefore-muuttujaa vastaamaan nykyisen kirjoituksen pituutta. Kun muuttujan ja uuden kirjoituksen pituuden ero on enemmän kuin yksi, leikkaa funktio tekstin kahtia edellisen kirjoituksen viimeisestä merkistä. Tämän jälkeen jokainen uudella kirjaimella on jälleen 33 %:n mahdollisuus, että se muuttuu muuksi. Lopuksi lengthbefore-muuttujaa päivitetään jälleen.
+
+Lopulta korvausmerkistöä oli hieman rajoitettava, koska hyvännäköistä fonttia, joka tukisi kaikkia unicode-merkkejä, oli erittäin vaikea löytää.
 
 Toiminnosta keskusteltiin jälkikäteen, ja olisi todennäköisesti fiksumpaa vain estää tekstin liittäminen. Lisäksi se ei edes toimi, tosin testitiedostossa se toimi ihan oikein.
 
@@ -102,7 +117,7 @@ moviebeginning.js-tiedostossa hieman testattiin, miten kuvia voidaan animoida jQ
 
 ## 2.6. Reaaliaikatoiminnallisuus
 
-Henri-cha~n
+Tämä oli suunnitelmissa aluksi. Eli pelaaja kykenisi päästelemään ääniä, ja kuka tahansa muu samaan aikaan peliä pelaava kuulisi ne reaaliajassa. Aluksi ideana oli käyttää tietokantaa, mutta pohdinnan jälkeen totesimme, että kyselyjen kokoaikainen lähetys olisi liian raskasta. Ainoa validi vaihtoehto johon päädyimme oli WebSocket-olion käyttäminen. Valitettavasti tätä varten olisi voitava konfiguroida koulun Apache-palvelinta, jotta palvelu saataisiin pystyyn. Se kun ei ole mahdollista, jätimme reaaliaikatoiminnallisuuden toteuttamatta toistaiseksi.
 
 ## 3. Ajan käyttö
 
@@ -114,12 +129,14 @@ Ajan mittaus aloitettiin rehdisti, mutta jossain vaiheessa se jäi. Hupsista. Ka
 **Tietokanta ja sen toiminnallisuudet:** 13h  
 **Pelaajan liikkuminen ja kentän luominen:** 20h  
 **Teksti-ikkuna ja sen toiminnallisuudet:** 8h  
-**Reaaliaikatoiminnallisuus:** 2h  
+**Reaaliaikatoiminnallisuus:** 2h
+**Grain-efekti ja pelin kulku** 3h
 **Spagettikoodin korjaus:** 10h  
-**Kämäset graffat:** 4h  
-**Yhteensä:** 66h
+**Kämäset graffat:** 4h
+**Loppudokumentointi** 3h
+**Yhteensä:** 72h
 
-Molemmat siis tekivät noin 33h. Tuntuu vähäiseltä.
+Molemmat siis tekivät noin 36h. Tuntuu vähäiseltä.
 
 ## 4. Pohdinta ja jatkokehitys
 
@@ -127,6 +144,6 @@ Pelinteko alkoi hyvin. Paljon oli intoa suunnittelussa ja itse pelin tekoa varte
 
 Jussille tämä oli ensimmäinen varsinainen kokemus tiimityöstä; kaikki aikaisemmat projektityöt olivat itsenäisesti tehtyjä. Hieno kokemus, toivottavasti tulevaisuudessa tulee lisää tiimitöitä. jQuery-PHP-kombinaatiolla oli mukava tehdä tätä. Sinänsä olisin halunnut käyttää Reactia ja Laravelia, mutta ajansäästösyistä ei kyennyt, ja ne eivät taida olla kovinkaan hyviä työkaluja tällaisen pelin tekemiseen.
 
-Henri asdasd
+Henrille tiimiprojektin kokemus oli myös ensikerta, sillä kaikki edelliset projektityöt olivat itse tehtyjä. Kokemus oli positiivinen (toisin kuin lukion projektityöt jossa yksi tekee kaiken ja muut laiskottelevat) ja upottava. Töitä teki vaikka 9 tuntia putkeen, eikä se tuntunut rasittavalta, vaan kiinnostavalta, vaikka aihealue ei ollutkaan oma keksimäni. Kätevää oli, että työt saatiin hyvin jaettua, joten kukin pystyi keskittymään omaan osa-alueeseensa huolimatta siitä, mitä toinen tarkalleen ottaen koodasi juuri samalla hetkellä, ja molemmilla oli samanaikaisesti jotain tehtävää. Peli-ohjelmointi on siis hauskaa myöskin ryhmässä. Olisi kiva jos olisimme saaneet mm. paremmat grafiikat ja kaikki toiminnallisuudet ajoissa aikaan, mutta toisaalta se jättää vapaa-ajallekin jotain tehtävää.
 
 Molemmat ovat erittäin halukkaita jatkamaan peliä eteenpäin omalla ajalla. Työhön ollaan saatu mukaan graafikko, joka luo paremmat grafiikat. Dokumentaatiossa mainittuihin heikkoja kohtia tullaan korjaamaan ja kehittämään eteenpäin. Lisäksi suunniteltuja toiminnallisuuksia, joita jäi toistaiseksi pois, tullaan lisäämään, kuten pelin vaiheet. Tietokanta tullaan siirtämään omalle vuokratulle palvelimelle ja itse peli omalle domainille. Tavoitteena on saada aikaan kokonaisuus, jota ihmiset mielellään pelaavat ja josta voimme olla ylpeitä.
