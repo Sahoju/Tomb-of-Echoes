@@ -3,6 +3,7 @@
 **Tekijät:** Henri Mäkelä, Jussi Surma-Aho  
 **Kurssit:** TTMS0500, Web-ohjelmointi; TTMS0900, Web-palvelinohjelmointi  
 **Päivämäärä:** 30.11.2018
+**Suositeltu selain:** Google Chrome
 
 ## 1.1. Yleisesti
 
