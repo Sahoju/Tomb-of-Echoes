@@ -27,7 +27,7 @@ Pelin alkuperäinen suunnitelma löytyy [Wiki-sivulta](https://github.com/Sahoju
 
 Pelistä toteutettiin hyvä osa näiden aikarajoitusten puitteissa. Tiedostojen kansiorakenne on seuraava:
 
-asdasd
+![Kansiorakenne](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/kansiorakenne.png)
 
 Seuraavissa kappaleissa selitetään pelin toteutusta.
 
@@ -45,6 +45,8 @@ preload-funktiossa lasketaan pois kaksi ensimmäistä json-tiedon hankkimaa "tie
 
 Lisäksi grain-efektille määritellään täällä ensisijaiset asetukset.
 
+![Kuvalataus](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/kuvalataus.png)
+
 ### 2.2.2. Tekstien lataus
 
 **Tiedostot:** init.js, getmessages.php, db_fns.php(, texts.txt)
@@ -56,6 +58,8 @@ getTexts-funktio kutsuu getLocations-funktiota, joka generoi kolme satunnaista r
 Alunperin tietokantaan tallennettiin vain tekstien indeksinumero, jonka avulla texts.txt-tiedostosta haettiin tekstit. Tämä toteutus koettiin hoopoksi, sillä koko kirjoitusmekanismista ei tulisi kovinkaan merkityksellinen, jos tekstit kuitenkin tulevat olemaan samankaltaisia kaikki. Nykyään kirjoitetut tekstit menevät tietokantaan sellaisenaan. Lisää asiasta kohdassa 2.4.
 
 Tietokantayhteys tuli aluksi tehtyä mysqli-komennoilla, mutta opettajan suostuttelemisen myötä komennot vaihdettiin PDO:hon.
+
+![Tekstilataus](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/tekstienlataus.png)
 
 ### 2.2.3. Latausprosentit
 
@@ -69,11 +73,9 @@ Pelissä oleva prosenttiluku viittaa latauksen edistystä. Luku alkaa nollasta, 
 
 Peli perustuu 2D-taulukon (lue: matriisin) navigointiin, joka luodaan startGame() alustusfunktiossa. Pelaajalle luodaan oma player.js olionsa, jolla on siis x ja y koordinaatit, ja lisäksi suunta "d", joka määrittää mitä hän näkee. Jokaisen matriisin alkioon on tallennettu tile.js objekti. tile.js objekti sisältää taulukon, jossa on 4 init.js:ssä esiladattua Image-oliota. Jokaiseen näistä Image-olioista sisältyy URL johonkin img/ kansion kuvaan. Pelaajan suunta (d) määrää indeksinä, mikä taulukon kuvista näytetään pelaajalle.
 
-0.0 1.0 2.0
+![suunnat](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/directions.PNG)
 
-0.1 1.1 2.1
-
-0.2 1.2 2.2
+![grid](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/grid.png)
 
 Toki tämän olisi voinut toteuttaa yksi-ulotteisestikin näin jälkipäin aatellen, mutta 2D-taulukko on ehkä intuitiivisempi lähestymistapa. Lisätietoa eri kuvien indekseistä saa doc/directions.txt tiedostosta.
 
@@ -88,6 +90,8 @@ movePlayer() sisältää pelin etenemislogiikan, jossa pelin phase:a inkrementoi
 **Tiedostot:** index.htm, game.js
 
 Teksti-ikkuna ilmestyy näyttöön, kun joko suurennuslasi- tai kynäikonia painetaan. Ikkuna ilmestyy pienellä animaatiolla, ja lähtee pois joko painamalla samaa ikonia uudestaan tai jonnekin muualle kuin ikoneihin tai ikkunaan itsessään. Jos painaa toista ikonia kuin millä ikkuna avattiin, ikkunan sisältö vaihtuu vastaavasti.
+
+![Teksti-ikkuna](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/tekstiakkuna_smol.png)
 
 ### 2.4.1. Tekstien luku
 
@@ -108,6 +112,8 @@ Lisäksi funktiolle määriteltiin toiminnallisuus pastettuja tekstejä varten: 
 Lopulta korvausmerkistöä oli hieman rajoitettava, koska hyvännäköistä fonttia, joka tukisi kaikkia unicode-merkkejä, oli erittäin vaikea löytää.
 
 Toiminnosta keskusteltiin jälkikäteen, ja olisi todennäköisesti fiksumpaa vain estää tekstin liittäminen. Lisäksi se ei edes toimi, tosin testitiedostossa se toimi ihan oikein.
+
+![writing-taulu](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/db_writing.PNG)
 
 ## 2.5. Alku- ja loppuvideot
 
@@ -131,11 +137,11 @@ Ajan mittaus aloitettiin rehdisti, mutta jossain vaiheessa se jäi. Hupsista. Ka
 **Tietokanta ja sen toiminnallisuudet:** 13h  
 **Pelaajan liikkuminen ja kentän luominen:** 20h  
 **Teksti-ikkuna ja sen toiminnallisuudet:** 8h  
-**Reaaliaikatoiminnallisuus:** 2h
-**Grain-efekti ja pelin kulku** 3h
+**Reaaliaikatoiminnallisuus:** 2h  
+**Grain-efekti ja pelin kulku:** 3h  
 **Spagettikoodin korjaus:** 10h  
-**Kämäset graffat:** 4h
-**Loppudokumentointi** 3h
+**Kämäset graffat:** 4h  
+**Loppudokumentointi:** 3h  
 **Yhteensä:** 72h
 
 Molemmat siis tekivät noin 36h. Tuntuu vähäiseltä.
