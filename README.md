@@ -9,7 +9,7 @@
 
 ## 1.1. Yleisesti
 
-Tomb of Echoes on prototyyppi lyhyestä kauhupelistä, jossa "voittamisen" tai pistemäärien tavoittelun sijaan koetaan lyhyt elämys. Pelissä päähahmo on joutunut tyhjään huoneeseen, josta ei ole pääsyä ulos. Huoneesta löytyy viestejä, joita muut pelaajat ovat jättäneet, ja pelaaja itse voi myös kirjoittaa viestejä. Peli suunniteltiin nimenomaan liittyvien kurssien arviointikriteerejä täyttäväksi.
+Tomb of Echoes on prototyyppi lyhyestä kauhupelistä, jossa "voittamisen" tai pistemäärien tavoittelun sijaan koetaan lyhyt elämys. Pelissä päähahmo on joutunut tyhjään huoneeseen, josta ei ole pääsyä ulos. Huoneesta löytyy viestejä, joita muut pelaajat ovat jättäneet, ja pelaaja itse voi myös kirjoittaa viestejä. Peli suunniteltiin nimenomaan liittyvien kurssien arviointikriteerejä täyttäväksi ja käyttää vahvasti jQuery-kirjaston eri toiminnallisuuksia.
 
 ## 1.2. Alkuperäinen suunnitelma
 
@@ -36,7 +36,7 @@ Seuraavissa kappaleissa selitetään pelin toteutusta.
 
 ## 2.2. Pelin initialisointi
 
-Kun sivu avataan, peli alkaa heti luomaan yhteyksiä tarvittavien tietojen välille. Tällä hetkellä yhteys luodaan kuviin ja tietokantaan, josta haetaan kolme tekstiä näytettäväksi tälle pelisessiolle.
+Kun sivu avataan, peli alkaa heti luomaan yhteyksiä tarvittavien tietojen välille. Tällä hetkellä yhteys luodaan kuviin ja tietokantaan, josta haetaan yhdeksän satunnaista tekstiä näytettäväksi tälle pelisessiolle.
 
 ### 2.2.1. Kuvien lataus
 
@@ -86,7 +86,7 @@ Liikkumista varten game.js sisältää tapahtumankuuntelijoita GUI:n napeille se
 
 Pelaajan suuntia on 4 (0-3), jossa 0 vastaa pohjoista (North) ja jatkuu siitä kellonsuuntaisesti East = 1, South = 2, West = 3. Hassua oli koodatessa huomata, että suunnanmuutoksessa käytettävä modulo % toimii eritavalla Javascriptissä kuin tavan matematiikassa, kun tullaan negatiivisiin kokonaislukuihin. Matemaattisesti -1 % 4 olisi 3, mutta Javascriptissä -1. Wikipedia-haun perusteella kyseinen asia on melkoinen dilemma eri kielien eroavista modulototeutuksista johtuen. Näin ollen vasemmalle käännyttäessä ei tehdäkään (d - 1) % 4 vaan (d + 3) % 4. Tapahtumankuuntelija päättää, syötetäänkö 1 vaiko 3, riippuen painettiinko oikeaa vaiko vasenta nuolta.
 
-movePlayer() sisältää pelin etenemislogiikan, jossa pelin phase:a inkrementoidaan aina, kun luettavat tekstit ovat loppuneet. Tässä kohdin esiin tulee netistä bongattu open-source grain-efektitoteutus. (https://github.com/sarathsaleem/grained) Grain-efektin voimakkuus kasvaa asynkroonisesti phasen kasvaessa, ja luettavat tekstit ja niiden koordinaatit korvautuvat uusilla. Tämä on pahan ennusmerkki. Lisäksi funktiossa päivitetään pelaajan koordinaatit, ja katsotaan, onko pelaajan liikkumalla tiilellä luettavaa tekstiä. Jos phase on 2, ja kaikki tekstit on luettu (eli phasea vastaavia tekstejä ei löydy enää tekstitaulukosta), peli päättyy endGame() funktiossa. movePlayer() funktion lopuksi kutsutaan drawNext() funktiota, joka päivittää pelaajalle näytettävää kuvaa hänen koordinaattiensa ja suunnan perusteella.
+movePlayer() sisältää pelin etenemislogiikan, jossa pelin phase:a inkrementoidaan aina, kun luettavat tekstit ovat loppuneet. Tässä kohdin esiin tulee netistä bongattu open-source grain-efektitoteutus. (https://github.com/sarathsaleem/grained) Grain-efektin voimakkuus on animoitu kasvamaan asynkroonisesti phasen kasvaessa (incrementPhase() ja increaseGrain()), ja luettavat tekstit ja niiden koordinaatit korvautuvat uusilla. Tämä on pahan ennusmerkki. Lisäksi funktiossa päivitetään pelaajan koordinaatit, ja katsotaan, onko pelaajan liikkumalla tiilellä luettavaa tekstiä. Jos phase on 2, ja kaikki tekstit on luettu (eli phasea vastaavia tekstejä ei löydy enää tekstitaulukosta), peli päättyy endGame() funktiossa. movePlayer() funktion lopuksi kutsutaan drawNext() funktiota, joka päivittää pelaajalle näytettävää kuvaa hänen koordinaattiensa ja suunnan perusteella.
 
 ## 2.4. Teksti-ikkuna
 
