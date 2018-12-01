@@ -115,14 +115,15 @@ function incrementPhase() //changing the phase of the game if no messages corres
     if(!Object.keys(textCoordinates).find(function(element) {
         return element[0] == phase; //if a textCoordinate exists with current phase, don't increment phase (notice the !)
     })) {
-        if (phase != 2)
+        if (phase < 2)
         {
             phase++;
             increaseGrain(31);
         }
-        else //phases are between 0 and 2, so if the phase is 2 and no more texts exist, the game ends
+        else if (phase == 2) //phases are between 0 and 2, so if the phase is 2 and no more texts exist, the game ends
         {
             increaseGrain(91);
+            phase++; //incrementing phase once more to stop further grain increase
             endGame();
         }
     }      
@@ -160,7 +161,8 @@ function movePlayer(d) { //event handler for letting the player move forwards an
     if ($('#textWindow').is(':visible'))
         hideText(); //hiding the text window if the player decides to move 
         
-    incrementPhase(); //updating game phase if needed
+    if (phase < 3)
+        incrementPhase(); //updating game phase if needed
 
     player.move(d);
 
