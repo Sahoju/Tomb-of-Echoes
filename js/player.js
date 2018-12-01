@@ -8,7 +8,7 @@ class Player {
     }
 
     getCoordinates() { //method for returning player coordinates to game.js
-        let coordinates = [this.x, this.y, this.direction];
+        let coordinates = [this.x, this.y];
         return coordinates;
     }
 

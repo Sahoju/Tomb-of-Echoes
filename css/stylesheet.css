@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "Crazy Killer";
-    src: url(CRAZK___.TTF);
+    font-family: "Tibetan Beefgarden AOE";
+    src: url(TibetBeeAOE.TTF);
 }
 
 body {
@@ -80,13 +80,21 @@ tr td {
     background: rgba(0,0,0,0.5);
 }
 
-#textWindow p,h3 {
+#middle p,h3 {
     margin: 0 auto;
     padding: 50px;
-    font-size: 30px;
     text-align: center;
     user-select: none;
     -moz-user-select: none;
+}
+
+#middle h3 {
+    font-size: 30px;
+}
+
+#middle p
+{
+    font-size: 70px;
 }
 
 input[type="button"] {

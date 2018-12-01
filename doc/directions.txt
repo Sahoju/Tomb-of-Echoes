@@ -1,0 +1,15 @@
+0,0 north: bg9.png		1,0 north: bg10.png		2,0 north: bg9.png
+0,0 east: bg0.png		1,0 east: bg3.png		2,0 east: bg10.png
+0,0 south: bg2.png	1,0 south: bg1.png		2,0 south: bg0.png
+0,0 west: bg10.png		1,0 west: bg4.png		2,0 west: bg2.png
+
+0,1 north: bg3.png		1,1: mid##.png       	 	2,1 north: bg4.png
+0,1 east: bg1.png		missä järjestyksessä 		 2,1 east: bg9.png
+0,1 south: bg4.png	tahansa              		 2,1 south: bg3.png
+0,1 west: bg9.png                              	   2,1 west: bg1.png
+
+0,2 north: bg0.png		1,2 north: bg1.png	        2,2 north: bg2.png
+0,2 east: bg2.png		1,2 east: bg4.png	        2,2 east: bg10.png
+0,2 south: bg9.png		1,2 south: bg10.png			2,2 south: bg9.png
+0,2 west: bg10.png		1,2 west: bg3.png	        2,2 west: bg0.png
+

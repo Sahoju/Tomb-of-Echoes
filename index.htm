@@ -4,21 +4,22 @@
         <title>Tomb of Echoes</title>
         <meta charset="utf-8" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="js/grained.min.js"></script>
         <script src="init.js"></script>
         <script src="js/game.js"></script>
         <script src="js/player.js"></script>
-        <script src="js/tile.js"></script>
+        <script src="js/tile.js"></script>       
         <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     </head>
     <body>
         <div id="outer">
-            <div id="middle">
+            <div id="middle">               
                 <div id="everything">
-                    <div id="percent"></div>                   
+                    <div id='grained'></div>
+                    <div id="percent"></div>                                   
                     <div id="controls">
                         <table>
-                            <tr><td></td><td>
-                                <img id="inspect" src="img/inspect.png"></td><td><img id="writeButton" src="img/write.png">
+                            <tr><td><img id="inspect" src="img/inspect.png"></td><td></td><td><img id="writeButton" src="img/write.png">
                             </td></tr>
                             <tr><td></td><td>
                                 <img id="arr1" src="img/arr1.png"></td>
@@ -29,22 +30,22 @@
                                 <td><img id="arr4" src="img/arr4.png"></td>
                             </tr>
                         </table>
-                    </div>
+                    </div>                
                     <div id="textWindow">
                         <span id="inspected">
                             <h3>There appears to be text written here...</h3>
                             <br>
                             <br>
-                            <p style="font-family: Crazy Killer;line-height:45px;"></p>
+                            <p style="font-family: Tibetan Beefgarden AOE;line-height:45px;"></p>
                         </span>
                         <span id="writing">
+                            <h3>Let your lamentations be heard by other lost souls...</h3>
                             <input type="text" id="writeTextbox">
-                            <input type="button" id="writeSend" value="write"><br>
-                            <br>
-                            <p style="font-family: Crazy Killer;line-height:45px;"></p>
+                            <input type="button" id="writeSend" value="Write">
                         </span>
                     </div>
-                </div> <!-- #everything -->
+                 <!-- #everything -->
+                </div>
             </div>
         </div>       
     </body>

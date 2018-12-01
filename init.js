@@ -1,6 +1,16 @@
 let imageElements = []; //associative array for storing preloaded images in
 let textCoordinates = []; // for storing database-fetched randomly selected text (and audio) and their coordinates in
-let texts = []; //for storing local pre-defined text options in 
+
+var options = { //options for grain effect
+    animate: true,
+    patternWidth: 100,
+    patternHeight: 100,
+    grainOpacity: 0.05,
+    grainDensity: 1,
+    grainWidth: 1,
+    grainHeight: 1
+};
+
 
 function preloadImage(url) { //does the actual preloading by loading the images into the global cache
     var image = new Image();
@@ -36,14 +46,8 @@ $(document).ready(function() { //collective function for preloading everything
         success: function(result) {
                 if(result) {
                     let resultObj = eval(result);
-                    console.log('getmessages:');
-                    console.log(resultObj);           
+                    console.log('getmessages:',resultObj);           
                     textCoordinates = resultObj;
-
-                    $.get('texts.txt', function(data){ //fetching options for in game text from local txt file
-                        texts = data.split('\n');
-                        console.log(texts);
-                    });
 
                     //indicating that things are done and we're ready to start
                     $('#percent').text(' 100 %');
@@ -54,7 +58,7 @@ $(document).ready(function() { //collective function for preloading everything
                 }
             }
         });
-    } 
+    }
 });
 
 function preload(imgs) {
@@ -71,6 +75,5 @@ function preload(imgs) {
         $('#percent').text(progress + ' %');
     });
 
-    console.log('imageElements: ');
-    console.log(imageElements);
+    console.log('imageElements: ',imageElements);
 }
