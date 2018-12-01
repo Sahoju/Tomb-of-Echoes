@@ -94,6 +94,8 @@ movePlayer() sisältää pelin etenemislogiikan, jossa pelin phase:a inkrementoi
 
 Teksti-ikkuna ilmestyy näyttöön, kun joko suurennuslasi- tai kynäikonia painetaan. Ikkuna ilmestyy (showText()) pienellä animaatiolla, ja lähtee pois (hideText()) joko painamalla samaa ikonia uudestaan tai jonnekin muualle kuin ikoneihin tai ikkunaan itsessään, taikka liikuttamalla pelaajaa. Jos painaa toista ikonia kuin millä ikkuna avattiin, ikkunan sisältö vaihtuu vastaavasti.
 
+Teksti-ikkunassa näytettävä erikoisfontti on 100% ilmainen. (https://www.dafont.com/tibetan-beefgarden.font)
+
 ![Teksti-ikkuna](https://student.labranet.jamk.fi/~L4929/ttms0500/ht/tekstiakkuna_smol.png)
 
 ### 2.4.1. Tekstien luku
