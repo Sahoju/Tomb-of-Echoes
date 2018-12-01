@@ -70,7 +70,9 @@ Pelissä oleva prosenttiluku viittaa latauksen edistystä. Luku alkaa nollasta, 
 Peli perustuu 2D-taulukon (lue: matriisin) navigointiin, joka luodaan startGame() alustusfunktiossa. Pelaajalle luodaan oma player.js olionsa, jolla on siis x ja y koordinaatit, ja lisäksi suunta "d", joka määrittää mitä hän näkee. Jokaisen matriisin alkioon on tallennettu tile.js objekti. tile.js objekti sisältää taulukon, jossa on 4 init.js:ssä esiladattua Image-oliota. Jokaiseen näistä Image-olioista sisältyy URL johonkin img/ kansion kuvaan. Pelaajan suunta (d) määrää indeksinä, mikä taulukon kuvista näytetään pelaajalle.
 
 0.0 1.0 2.0
+
 0.1 1.1 2.1
+
 0.2 1.2 2.2
 
 Toki tämän olisi voinut toteuttaa yksi-ulotteisestikin näin jälkipäin aatellen, mutta 2D-taulukko on ehkä intuitiivisempi lähestymistapa. Lisätietoa eri kuvien indekseistä saa doc/directions.txt tiedostosta.
