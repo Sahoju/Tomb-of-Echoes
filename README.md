@@ -102,6 +102,8 @@ Teksti-ikkuna ilmestyy näyttöön, kun joko suurennuslasi- tai kynäikonia pain
 
 Kohdassa 2.2.2. selitettiin tekstien hausta. Kun pelaaja siirtyy kohtaan, minkä koordinaatit ovat samat kuin jonkin viestin, suurennuslasi ilmestyy näytölle. Sitä painaessa ilmestyy pienellä animaatiolla teksti-ikkuna, jossa lukee kyseinen viesti.
 
+Kun teksti on luettu, ja pelaaja liikkuu, luettu teksti poistetaan tekstitaulukosta. Tämä tehdään, jotta pelaajan on helpompi edetä pelissä ja lukea kaikki viestit törmäämättä koko ajan samoihin.
+
 ### 2.4.2. Tekstien kirjoitus
 
 **Tiedostot:** game.js, writemessages.php, db_fns.php
